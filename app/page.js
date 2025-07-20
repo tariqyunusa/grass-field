@@ -7,33 +7,6 @@ import * as THREE from "three";
 import GrassField from "./GrassField";
 
 
-const ColorCubeBackground = () => {
-  const materials = useMemo(() => (
-    [
-      "#87ceeb",
-      "#87ceeb",
-      "#87ceeb",
-      "#000000",
-      "#87ceeb",
-      "#87ceeb",
-    ].map((color, i) => (
-      <meshBasicMaterial
-        key={i}
-        attach={`material-${i}`}
-        color={color}
-        side={THREE.BackSide}
-      />
-    ))
-  ), []);
-
-  return (
-    <mesh position={[0, -50, 0]}>
-      <boxGeometry args={[50, 200, 10]} />
-      {materials}
-    </mesh>
-  );
-};
-
 
 export default function Home() {
   const ambientLightRef = useRef();
@@ -49,7 +22,7 @@ export default function Home() {
         overflow: "hidden",
       }}
     >
-      <Canvas shadows={false} camera={{ position: [-1, 4.5, 20.8], fov: 50 }}>
+      <Canvas shadows={false} camera={{ position: [0, 10.5, 20], fov: 50 }}>
         <ambientLight
           ref={ambientLightRef}
           intensity={0.5}
@@ -61,14 +34,13 @@ export default function Home() {
           intensity={1}
           color={"#c2a07d"}
         />       
-        {/* <ColorCubeBackground /> */}
         <color attach="background" args={["#87ceeb"]} />
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow={false}>
-          <planeGeometry args={[50, 30]} />
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 10]} receiveShadow={false}>
+          <planeGeometry args={[50, 20]} />
           <meshStandardMaterial color="#1a0d07ff" />
         </mesh>
-        <OrbitControls />
-        <GrassField count={30000} spread={{ x: 50, z: 30 }} />
+        {/* <OrbitControls /> */}
+        <GrassField count={50000} spread={{ x: 50, z: 20 }} position={[0, -0.01, 10]} />
       </Canvas>
     </section>
   );

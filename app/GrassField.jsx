@@ -61,7 +61,7 @@ const bladeGeometry = createBladeGeometry();
 const bladeMaterial = new BladeMaterial();
 bladeMaterial.side = THREE.DoubleSide;
 
-export default function GrassField({ count = 10000, spread = 200 }) {
+export default function GrassField({ count = 10000, spread = 200, position=[0, 0, 15]}) {
   const meshRef = useRef();
   const materialRef = useRef();
   const dummy = useMemo(() => new THREE.Object3D(), []);
@@ -74,14 +74,11 @@ export default function GrassField({ count = 10000, spread = 200 }) {
     const spreadX = spread?.x ?? spread;
     const spreadZ = spread?.z ?? spread;
 
-
-    const offsets = new Float32Array(count);
-
     for (let i = 0; i < count; i++) {
       dummy.position.set(
         (Math.random() - 0.5) * spreadX,
         0,
-        (Math.random() - 0.5) * spreadZ
+        (Math.random()) * spreadZ
       );
       dummy.rotation.y = Math.random() * Math.PI;
 
@@ -90,14 +87,7 @@ export default function GrassField({ count = 10000, spread = 200 }) {
       dummy.updateMatrix();
 
       meshRef.current.setMatrixAt(i, dummy.matrix);
-      offsets[i] = Math.random(); 
     }
-
-    meshRef.current.geometry.setAttribute(
-      "offset",
-      new THREE.InstancedBufferAttribute(offsets, 1)
-    );
-
     meshRef.current.instanceMatrix.needsUpdate = true;
   }, []); 
 
@@ -108,11 +98,14 @@ export default function GrassField({ count = 10000, spread = 200 }) {
   });
 
   return (
-    <instancedMesh
+    <group position={position}>
+      <instancedMesh
       ref={meshRef}
       args={[bladeGeometry, null, count]}
+    
     >
       <primitive object={bladeMaterial} attach="material" ref={materialRef} />
     </instancedMesh>
+    </group>
   );
 }
