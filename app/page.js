@@ -5,6 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 import { useRef, useMemo } from "react";
 import * as THREE from "three";
 import GrassField from "./GrassField";
+import CloudPlane from "./CloudPlane";
 
 
 
@@ -22,7 +23,7 @@ export default function Home() {
         overflow: "hidden",
       }}
     >
-      <Canvas shadows={false} camera={{ position: [0, 10.5, 20], fov: 50 }}>
+      <Canvas shadows={false} camera={{ position: [0, 10, 20], fov: 50,near: 0.1, far: 1000}}>
         <ambientLight
           ref={ambientLightRef}
           intensity={0.5}
@@ -34,13 +35,14 @@ export default function Home() {
           intensity={1}
           color={"#c2a07d"}
         />       
-        <color attach="background" args={["#87ceeb"]} />
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 10]} receiveShadow={false}>
+        <color attach="background" args={["#87CEFA"]} />
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 15]} receiveShadow={false}>
           <planeGeometry args={[50, 20]} />
           <meshStandardMaterial color="#1a0d07ff" />
         </mesh>
-        {/* <OrbitControls /> */}
-        <GrassField count={50000} spread={{ x: 50, z: 20 }} position={[0, -0.01, 10]} />
+        <OrbitControls />
+        <CloudPlane />
+        <GrassField count={50000} spread={{ x: 50, z: 20 }} position={[0, -0.01, 0]} />
       </Canvas>
     </section>
   );
