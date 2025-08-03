@@ -58,14 +58,14 @@ export default function Home() {
         <directionalLight
           ref={dirLightRef}
           position={[-1, 20, 5]}
-          intensity={2}
+          intensity={1}
           color={"#c2a07d"}
         />       
         {/* <ColorCubeBackground /> */}
         <color attach="background" args={["#87ceeb"]} />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow={false}>
           <planeGeometry args={[50, 30]} />
-          <meshStandardMaterial color="#4b2e1f" />
+          <meshStandardMaterial color="#1a0d07ff" />
         </mesh>
         <OrbitControls />
         <GrassField count={30000} spread={{ x: 50, z: 30 }} />

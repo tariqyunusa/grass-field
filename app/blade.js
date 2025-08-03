@@ -4,7 +4,7 @@ import * as THREE from "three";
 const BladeMaterial = shaderMaterial(
   {
     time: 0,
-     color: new THREE.Color(0.6, 1.0, 0.6)
+    color: new THREE.Color(0.3, 0.6, 0.3), // darker green for uniform reference
   },
   // Vertex Shader
   `
@@ -28,38 +28,35 @@ const BladeMaterial = shaderMaterial(
       float sway = sin(time * speed + worldPos.x * frequency + offset) * amplitude;
       sway *= uv.y * 2.0;
       newPosition.x += sway;
+
       float curve = sin(uv.y * 3.14) * 0.01;
       float twist = cos(uv.y * 3.14) * 0.005;
       newPosition.x += curve;
       newPosition.z += twist;
+
       vec4 worldPosition = instanceMatrix * vec4(newPosition, 1.0);
       gl_Position = projectionMatrix * viewMatrix * worldPosition;
     }
   `,
   // Fragment Shader
   `
-varying vec2 vUv;
-varying vec3 vNormal;
+    varying vec2 vUv;
+    varying vec3 vNormal;
 
-void main() {
-  // Slightly darker light green base
-  vec3 baseColor = mix(vec3(0.5, 0.9, 0.5), vec3(0.7, 0.95, 0.7), vUv.y);
+    void main() {
+      // Dark green gradient from base to tip
+      vec3 baseColor = mix(vec3(0.2, 0.4, 0.2), vec3(0.3, 0.6, 0.3), vUv.y);
 
-  vec3 lightDir = normalize(vec3(0.5, 1.0, 0.75));
-  float light = dot(normalize(vNormal), lightDir);
-  light = clamp(light, 0.3, 1.0);
+      vec3 lightDir = normalize(vec3(0.5, 1.0, 0.75));
+      float light = dot(normalize(vNormal), lightDir);
+      light = clamp(light, 0.3, 1.0);
 
-  // Slightly darker green tint for lighting
-  vec3 greenLightTint = vec3(0.5, 0.9, 0.5); // previously 0.6, 1.0, 0.6
+      vec3 greenLightTint = vec3(0.6, 0.85, 0.6); // subtle green tint with darker tone
 
-  vec3 finalColor = baseColor * light * greenLightTint;
+      vec3 finalColor = baseColor * light * greenLightTint;
 
-  gl_FragColor = vec4(finalColor, 1.0);
-}
-
-
-
-
+      gl_FragColor = vec4(finalColor, 1.0);
+    }
   `
 );
 
