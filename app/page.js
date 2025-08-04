@@ -40,7 +40,7 @@ export default function Home() {
           <planeGeometry args={[50, 10]} />
           <meshStandardMaterial color="#1a0d07ff" />
         </mesh>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         <CloudPlane />
         <GrassField count={40000} spread={{ x: 50, z: 10 }} position={[0, -0.01, 2.2]} />
       </Canvas>

@@ -1,18 +1,18 @@
 import * as THREE from "three";
 
-export function generateNoiseTexture(size = 256) {
-  const data = new Uint8Array(size * size);
-  for (let i = 0; i < size * size; i++) {
-    data[i] = Math.floor(Math.random() * 256);
-  }
+// export function generateNoiseTexture(size = 256) {
+//   const data = new Uint8Array(size * size);
+//   for (let i = 0; i < size * size; i++) {
+//     data[i] = Math.floor(Math.random() * 256);
+//   }
 
-  const texture = new THREE.DataTexture(data, size, size, THREE.LuminanceFormat);
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.minFilter = texture.magFilter = THREE.LinearFilter;
-  texture.needsUpdate = true;
+//   const texture = new THREE.DataTexture(data, size, size, THREE.LuminanceFormat);
+//   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+//   texture.minFilter = texture.magFilter = THREE.LinearFilter;
+//   texture.needsUpdate = true;
 
-  return texture;
-}
+//   return texture;
+// }
 
 export function createBladeGeometry() {
   const width = 0.1;
