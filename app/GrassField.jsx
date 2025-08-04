@@ -78,7 +78,7 @@ export default function GrassField({ count = 10000, spread = 200, position=[0, 0
       dummy.position.set(
         (Math.random() - 0.5) * spreadX,
         0,
-        (Math.random() +0.25) * spreadZ
+        (Math.random() + 0.3) * spreadZ
       );
       dummy.rotation.y = Math.random() * Math.PI;
 
