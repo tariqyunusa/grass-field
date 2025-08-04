@@ -36,13 +36,13 @@ export default function Home() {
           color={"#c2a07d"}
         />       
         <color attach="background" args={["#87CEFA"]} />
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 15]} receiveShadow={false}>
-          <planeGeometry args={[50, 20]} />
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 8]} receiveShadow={false}>
+          <planeGeometry args={[50, 10]} />
           <meshStandardMaterial color="#1a0d07ff" />
         </mesh>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         <CloudPlane />
-        <GrassField count={50000} spread={{ x: 50, z: 20 }} position={[0, -0.01, 0]} />
+        <GrassField count={40000} spread={{ x: 50, z: 10 }} position={[0, -0.01, 2.2]} />
       </Canvas>
     </section>
   );
