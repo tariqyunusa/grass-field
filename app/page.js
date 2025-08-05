@@ -8,7 +8,8 @@ import GrassField from "./GrassField";
 import CloudPlane from "./CloudPlane";
 import styles from "./page.module.css"
 import Image from "next/image";
-import { Flower, Volume2, VolumeOff } from "lucide-react";
+
+import Hero from "./components/Hero";
 
 
 export default function Home() {
@@ -24,29 +25,11 @@ export default function Home() {
         margin: 0,
         padding: 0,
         overflow: "hidden",
+        position: "relative"
       }}
     >
       <main className={styles.main_section}>
-        <nav className={styles.nav}>
-          <h1 className={styles.logo}>Serenai</h1>
-          <button className={styles.cta}>Menu</button>
-         <Flower className={styles.icon}/>
-        </nav>
-
-        <div className={styles.content}>
-         <div className={styles.content__wrapper}>
-            <h1  className={styles.headline}>Serenai. Where Stillness Begins.</h1>
-            <p className={styles.subheadline}>Your daily pause — a gentle invitation to breathe, reflect, and simply be.</p>
-           <div>
-             <button className={styles.cta__}>Enter</button>
-            </div>
-         </div>
-         <div className={styles.sound__wrapper}>
-          <button className={styles.icon__sound}>
-            <Volume2 />
-          </button>
-         </div>
-        </div>
+       <Hero />
        
       </main>
       <Canvas shadows={false} camera={{ position: [0, 10, 20], fov: 50,near: 0.1, far: 1000}}>
