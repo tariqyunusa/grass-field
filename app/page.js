@@ -8,7 +8,7 @@ import GrassField from "./GrassField";
 import CloudPlane from "./CloudPlane";
 import styles from "./page.module.css"
 import Image from "next/image";
-import { Flower } from "lucide-react";
+import { Flower, Volume2, VolumeOff } from "lucide-react";
 
 
 export default function Home() {
@@ -34,15 +34,18 @@ export default function Home() {
         </nav>
 
         <div className={styles.content}>
-          {/* <div className={styles.headline_wrapper}> */}
+         <div className={styles.content__wrapper}>
             <h1  className={styles.headline}>Serenai. Where Stillness Begins.</h1>
-          {/* </div> */}
-          {/* <div className={styles.subheadline_wrapper}> */}
             <p className={styles.subheadline}>Your daily pause — a gentle invitation to breathe, reflect, and simply be.</p>
-          {/* </div> */}
            <div>
-          <button className={styles.cta__}>Enter</button>
-        </div>
+             <button className={styles.cta__}>Enter</button>
+            </div>
+         </div>
+         <div className={styles.sound__wrapper}>
+          <button className={styles.icon__sound}>
+            <Volume2 />
+          </button>
+         </div>
         </div>
        
       </main>
