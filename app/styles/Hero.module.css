@@ -41,6 +41,7 @@
   font-family: var(--font-calistoga);
   color: #fff;
   font-size: 3rem;
+
 }
 .subheadline {
   font-family: var(--font-inter);
@@ -100,7 +101,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateX(100%);
+ 
 }
+
 .sidebar__close {
   background-color: #fff;
   color: #000;
@@ -119,9 +123,24 @@
   padding: 1rem;
   display: flex;
   gap: 1rem;
-  flex-direction: column;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
   position: relative;
   top: -4rem;
+  width: 100%;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+.sidebar__step_slider{
+  display: flex;
+    transition: transform 0.5s ease-in-out;
+  width: 200%;
+}
+.sidebar__step {
+  flex: 0 0 100%;
+  padding: 1rem;
+  /* box-sizing: border-box; */
 }
 .sidebar__header {
   position: absolute;
@@ -137,13 +156,14 @@
   font-family: var(--font-calistoga);
   /* font-weight: 400; */
   font-size: 2rem;
+  margin-bottom: 1rem;
 }
 .feeling__dropdown {
   appearance: none; 
   -webkit-appearance: none;
   -moz-appearance: none;
   border: none;
-  padding: 0.8rem 0.7rem;
+  padding: 0.8rem 1.5rem;
   outline: none;
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 16px;
@@ -158,6 +178,10 @@
     position: absolute;
     bottom: 1rem;
     left: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
 }
 .sidebar__inner_link p{
     font-family: var(--font-inter);
@@ -165,6 +189,11 @@
 .sidebar__inner_link p a{
     text-decoration: none;
     color: #000;
+}
+.share__link{
+  text-decoration: none;
+  color: #000;
+  font-family: var(--font-inter);
 }
 .sidebar__cta{
     background-color: #000;
@@ -174,4 +203,44 @@
   cursor: pointer;
   padding: 0.8rem 1.4rem;
   border-radius: 22px;
+  margin-top: 0.7rem;
+}
+.sidebar__cta:active{
+  transform: scale(0.95);
+}
+/* feeling */
+.feelingTitle{
+  font-family: var(--font-calistoga);
+  font-size: 2rem;
+}
+.feeling__image{
+  width: 200px;
+  height: 200px;
+  background-color: #000;
+  border-radius: 50%;
+  align-self: center;
+}
+.feeling{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.feelingDescription{
+  font-family: var(--font-inter);
+}
+.btn__wrapper{
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.btn__wrapper button{
+  padding: 0.7rem 0.8rem;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  border-radius: 22px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
 }
