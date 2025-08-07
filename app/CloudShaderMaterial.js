@@ -26,7 +26,7 @@ float noise(in vec2 p) {
 const CloudShaderMaterial = shaderMaterial(
   {
     time: 0,
-    color: new THREE.Color("#ffffff"),
+    color: new THREE.Color("#e7e7e7ff"),
   },
   // Vertex Shader
   `
@@ -75,7 +75,7 @@ void main() {
     cloud = max(cloud, max(staticCloud1, staticCloud2));
 
 
-    gl_FragColor = vec4(color, cloud * 0.3); // Final output with opacity
+    gl_FragColor = vec4(color, cloud * 0.6); 
 }
 
   `
