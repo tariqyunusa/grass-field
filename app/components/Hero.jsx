@@ -11,6 +11,7 @@ import {
 import { useState, useRef, useLayoutEffect } from "react";
 import { selectMeditation, sideBarAnimation } from "../helpers";
 import gsap from "gsap";
+import Dropdown from "./Dropdown";
 
 const Feeling = ({ emotion }) => {
   if (!emotion) return null;
@@ -50,17 +51,18 @@ export default function Hero() {
     setSidebarOpen(true);
   };
 
-  const closeSidebar = () => {
+ const closeSidebar = () => {
   if (openTl.current) {
-   
-    openTl.current.reverse();
     openTl.current.eventCallback("onReverseComplete", () => {
       setSidebarOpen(false);
       openTl.current = null;
-      setStep(0)
+      setStep(0);
     });
+
+    openTl.current.reverse();
   }
 };
+
 
  useLayoutEffect(() => {
  sideBarAnimation(
@@ -128,12 +130,15 @@ export default function Hero() {
                 <h2 className={styles.sidebar__inner_header} ref={headlineRef}>
                   How are you feeling today?
                 </h2>
-                <select
+                <div >
+                  <Dropdown ref={dropdownRef} />
+                </div>
+                {/* <select
                   name="dropdown"
                   className={styles.feeling__dropdown}
                   onChange={(e) => setFeeling(e.target.value)}
                   defaultValue=""
-                  ref={dropdownRef}
+                  
                 >
                   <option value="" disabled>
                     Pick an emotion
@@ -146,7 +151,7 @@ export default function Hero() {
                   <option value="calm">Calm</option>
                   <option value="grateful">Grateful</option>
                   <option value="happy">Happy</option>
-                </select>
+                </select> */}
                 <div className={styles.sidebar_main_cta}>
                   <button
                     className={styles.sidebar__cta}
