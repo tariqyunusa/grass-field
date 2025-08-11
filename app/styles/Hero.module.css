@@ -127,20 +127,25 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  /* top: -4rem; */
+  top: 2rem;
   width: 100%;
   overflow: hidden;
   transition: transform 0.5s ease;
-  height: 80%;
+  height: 100%;
+
 }
 .sidebar__step_slider{
   display: flex;
     transition: transform 0.5s ease-in-out;
+    position: absolute;
+    top: 25%;
   width: 200%;
 }
 .sidebar__step {
   flex: 0 0 100%;
   padding: 1rem;
+  /* position: absolute; */
+  /* top: 0; */
   /* box-sizing: border-box; */
 }
 .sidebar__header {
@@ -196,6 +201,10 @@
   color: #000;
   font-family: var(--font-inter);
 }
+.sidebar_main_cta{
+  /* z-index: ; */
+  position: relative;
+}
 .sidebar__cta{
     background-color: #000;
   color: #fff;
@@ -205,6 +214,7 @@
   padding: 0.8rem 1.4rem;
   border-radius: 22px;
   margin-top: 0.7rem;
+  z-index: -1;
 }
 .sidebar__cta:active{
   transform: scale(0.95);

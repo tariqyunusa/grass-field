@@ -130,28 +130,10 @@ export default function Hero() {
                 <h2 className={styles.sidebar__inner_header} ref={headlineRef}>
                   How are you feeling today?
                 </h2>
-                <div >
-                  <Dropdown ref={dropdownRef} />
+                <div ref={dropdownRef}>
+                  <Dropdown  setFeeling={setFeeling} />
                 </div>
-                {/* <select
-                  name="dropdown"
-                  className={styles.feeling__dropdown}
-                  onChange={(e) => setFeeling(e.target.value)}
-                  defaultValue=""
-                  
-                >
-                  <option value="" disabled>
-                    Pick an emotion
-                  </option>
-                  <option value="anxiety">Anxiety</option>
-                  <option value="stress">Stress</option>
-                  <option value="sadness">Sadness</option>
-                  <option value="tired">Tired</option>
-                  <option value="angry">Angry</option>
-                  <option value="calm">Calm</option>
-                  <option value="grateful">Grateful</option>
-                  <option value="happy">Happy</option>
-                </select> */}
+
                 <div className={styles.sidebar_main_cta}>
                   <button
                     className={styles.sidebar__cta}
