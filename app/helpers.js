@@ -119,6 +119,18 @@ export const selectMeditation = (emotion) => {
   return { title, description, meditations };
 }
 
+export const meditationConfig = {
+  "Anchor to Breath": { duration: 180, inhale: 4, exhale: 6 },
+  "Cooling the Flame": { duration: 180, inhale: 4, exhale: 4 },
+  "Light in the Fog": { duration: 180, inhale: 4, exhale: 4 },
+  "Breathe & Reset": { duration: 180, inhale: 4, hold: 4, exhale: 4 },
+  "Release the Day": { duration: 180, inhale: 4, exhale: 8 },
+  "Observe the Storm": { duration: 180, inhale: 4, exhale: 4 },
+  "Soft Center": { duration: 180, inhale: 5, exhale: 5 },
+  "Tiny Sparks": { duration: 180, inhale: 4, exhale: 4 },
+  "Share the Light": { duration: 180, inhale: 4, exhale: 4 },
+};
+
 export const sideBarAnimation = (sidebarRef, closeButtonRef, dropdownRef, nextButtonRef, footerRef, sidebarOpen,openTl, logoSidebarRef, headlineRef) => {
    if (!sidebarOpen || !sidebarRef.current) return;
 

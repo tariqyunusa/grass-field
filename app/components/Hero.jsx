@@ -8,22 +8,81 @@ import {
   ArrowLeft,
   ExternalLink,
 } from "lucide-react";
-import { useState, useRef, useLayoutEffect } from "react";
-import { selectMeditation, sideBarAnimation } from "../helpers";
+import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import {
+  meditationConfig,
+  selectMeditation,
+  sideBarAnimation,
+} from "../helpers";
 import gsap from "gsap";
 import Dropdown from "./Dropdown";
 
 const Feeling = ({ emotion }) => {
   if (!emotion) return null;
   const { title, description, meditations } = selectMeditation(emotion);
+  const [currentMeditation, setCurrentMeditation] = useState(meditations[0]);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const config = meditationConfig[meditations];
+  const totalDuration = config?.duration || 180;
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const timer = setInterval(() => {
+      setTimeElapsed((prev) => {
+        if (prev < totalDuration) {
+          return prev + 1;
+        } else {
+          clearInterval(timer);
+          setIsRunning(false);
+          return prev;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isRunning, totalDuration]);
+
+  const progress = timeElapsed / totalDuration;
+
+  const startMeditation = () => {
+    setTimeElapsed(0);
+    setIsRunning(true);
+  };
+
   return (
     <div style={{ width: "100%", position: "relative" }}>
-      <div style={{ position: "absolute", top: "0", left: "0" }}>
-      </div>
+      <div style={{ position: "absolute", top: "0", left: "0" }}></div>
       <div className={styles.feeling}>
         <h3 className={styles.feelingTitle}>{title}</h3>
-        <div className={styles.feeling__image}></div>
+
+        {/* <div className={styles.feeling__image} onClick={startMeditation}></div> */}
+        <div className={styles.progressWrapper} onClick={startMeditation}>
+          <svg className={styles.progressCircle} viewBox="0 0 140 140">
+            <circle className={styles.progressBg} cx="70" cy="70" r="64" />
+            <circle
+              className={styles.progress}
+              cx="70"
+              cy="70"
+              r="58"
+              style={{
+                strokeDasharray: 2 * Math.PI * 64, // ~402.12
+                strokeDashoffset:
+                  2 * Math.PI * 64 - progress * (2 * Math.PI * 64),
+              }}
+            />
+          </svg>
+          <div className={styles.feeling__image}></div>
+        </div>
+
         <p className={styles.feelingDescription}>{description}</p>
+        <div className={styles.progress_contatiner}>
+          <div
+            className={styles.progressBar}
+            style={{ width: `${progress * 100}%` }}
+          />
+        </div>
         <div className={styles.btn__wrapper}>
           <button className={styles.btn__save}>End Session</button>
         </div>
@@ -51,33 +110,31 @@ export default function Hero() {
     setSidebarOpen(true);
   };
 
- const closeSidebar = () => {
-  if (openTl.current) {
-    openTl.current.eventCallback("onReverseComplete", () => {
-      setSidebarOpen(false);
-      openTl.current = null;
-      setStep(0);
-    });
+  const closeSidebar = () => {
+    if (openTl.current) {
+      openTl.current.eventCallback("onReverseComplete", () => {
+        setSidebarOpen(false);
+        openTl.current = null;
+        setStep(0);
+      });
 
-    openTl.current.reverse();
-  }
-};
+      openTl.current.reverse();
+    }
+  };
 
-
- useLayoutEffect(() => {
- sideBarAnimation(
-    sidebarRef,
-    closeButtonRef,
-    dropdownRef,
-    nextButtonRef,
-    footerRef,
-    sidebarOpen,
-    openTl,
-    logoSidebarRef,
-    headlineRef
-  );
-}, [sidebarOpen]);
-
+  useLayoutEffect(() => {
+    sideBarAnimation(
+      sidebarRef,
+      closeButtonRef,
+      dropdownRef,
+      nextButtonRef,
+      footerRef,
+      sidebarOpen,
+      openTl,
+      logoSidebarRef,
+      headlineRef
+    );
+  }, [sidebarOpen]);
 
   return (
     <>
@@ -131,7 +188,7 @@ export default function Hero() {
                   How are you feeling today?
                 </h2>
                 <div ref={dropdownRef}>
-                  <Dropdown  setFeeling={setFeeling} />
+                  <Dropdown setFeeling={setFeeling} />
                 </div>
 
                 <div className={styles.sidebar_main_cta}>
