@@ -5,6 +5,8 @@
     display: flex;
     justify-content: center;
     position: relative;
+    /* z-index: 1000; */
+    /* top: -2rem; */
 }
 .dropdown_default{
     display: flex;
@@ -36,8 +38,8 @@
     background-color: #f1f1f1;
     position: absolute;
     top: 7vh;
-    left: 34%;
-    z-index: 1000;
+    left: 42.5%;
+    /* z-index: 9999; */
     padding: 0.8rem 0.5rem;
     border-radius: 12px;
     /* width: 32%; */

@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 import styles from "../styles/Dropdown.module.css";
 import { useState } from "react";
 
-const Dropdown = () => {
+const Dropdown = ({ setFeeling }) => {
   const [openDropDown, setOpenDropdown] = useState(false);
   const [selectedEmotion, setSelectedEmotion] = useState(null);
 
@@ -40,6 +40,7 @@ const Dropdown = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
+          
           >
             {emotions.map((feeling, idx) => (
               <motion.div
@@ -48,6 +49,7 @@ const Dropdown = () => {
                 onClick={() => {
                   setSelectedEmotion(feeling);
                   setOpenDropdown(false);
+                  setFeeling(feeling)
                 }}
                 initial={false} 
                 animate={{ backgroundColor: "transparent" }} 
