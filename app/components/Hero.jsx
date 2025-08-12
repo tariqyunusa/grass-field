@@ -65,9 +65,9 @@ const Feeling = ({ emotion }) => {
               className={styles.progress}
               cx="70"
               cy="70"
-              r="58"
+              r="64"
               style={{
-                strokeDasharray: 2 * Math.PI * 64, // ~402.12
+                strokeDasharray: 2 * Math.PI * 64, 
                 strokeDashoffset:
                   2 * Math.PI * 64 - progress * (2 * Math.PI * 64),
               }}
@@ -92,7 +92,7 @@ const Feeling = ({ emotion }) => {
   );
 };
 
-export default function Hero() {
+export default function Hero({ headerRef, paragraphRef, soundBtnRef }) {
   const [feeling, setFeeling] = useState();
   const [step, setStep] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -138,14 +138,14 @@ export default function Hero() {
 
   return (
     <>
-      <nav className={styles.nav}>
+      <nav className={styles.nav} ref={headerRef}>
         <h1 className={styles.logo}>Serenai</h1>
         <button className={styles.cta}>Menu</button>
         <Flower className={styles.icon} />
       </nav>
 
       <div className={styles.content}>
-        <div className={styles.content__wrapper}>
+        <div className={styles.content__wrapper} ref={paragraphRef}>
           <h1 className={styles.headline}>Serenai. Where Stillness Begins.</h1>
           <p className={styles.subheadline}>
             Your daily pause — a gentle invitation to breathe, reflect, and
@@ -157,7 +157,7 @@ export default function Hero() {
             </button>
           </div>
         </div>
-        <div className={styles.sound__wrapper}>
+        <div className={styles.sound__wrapper} ref={soundBtnRef}>
           <button className={styles.icon__sound}>
             <Volume2 />
           </button>
