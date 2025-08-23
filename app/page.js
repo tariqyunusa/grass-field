@@ -27,14 +27,14 @@ function CameraIntroAnimation({ headerRef, paragraphRef }) {
       z: 18,  
       duration: 1.8,
       ease: "power2.inOut",
-      onUpdate: () => camera.lookAt(0, 0, 0),
+      // onUpdate: () => camera.lookAt(0, 0, 0),
     })
     .to(camera.position, {
       y: 10,
       z: 20,
       duration: 0.8,
       ease: "power1.out",
-      onUpdate: () => camera.lookAt(0, 0, 0),
+      // onUpdate: () => camera.lookAt(0, 0, 0),
     })
     .from(headerRef.current, {
       opacity: 0,
