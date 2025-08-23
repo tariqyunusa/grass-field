@@ -198,6 +198,7 @@
   text-decoration: none;
   color: #000;
   font-family: var(--font-inter);
+  cursor: pointer;
 }
 /* .sidebar_main_cta{
   z-index: ;
@@ -217,8 +218,32 @@
 .sidebar__cta:active{
   transform: scale(0.95);
 }
+.share__option_icon{
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
 
-
+.sharee__option{
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.6rem 0.6rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.share__popup{
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 0.5rem;
+  background-color: #f1f1f1;
+  border-radius: 18px;
+  position: absolute;
+  right: 0;
+  top: -12rem;
+}
+.sharee__option:hover {
+  background-color: #fff;
+}
 /* feeling */
 .feelingTitle{
   font-family: var(--font-calistoga);
