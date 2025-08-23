@@ -67,7 +67,7 @@ const Feeling = ({ emotion }) => {
               cy="70"
               r="64"
               style={{
-                strokeDasharray: 2 * Math.PI * 64, 
+                strokeDasharray: 2 * Math.PI * 64,
                 strokeDashoffset:
                   2 * Math.PI * 64 - progress * (2 * Math.PI * 64),
               }}
