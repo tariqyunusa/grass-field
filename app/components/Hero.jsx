@@ -5,6 +5,7 @@ import {
   Volume2,
   VolumeOff,
   X,
+  Copy,
   ArrowLeft,
   ExternalLink,
 } from "lucide-react";
@@ -16,6 +17,7 @@ import {
 } from "../helpers";
 import gsap from "gsap";
 import Dropdown from "./Dropdown";
+import Image from "next/image";
 
 const Feeling = ({ emotion }) => {
   if (!emotion) return null;
@@ -87,7 +89,6 @@ const Feeling = ({ emotion }) => {
           <button className={styles.btn__save}>End Session</button>
         </div>
       </div>
-      <h3></h3>
     </div>
   );
 };
@@ -206,8 +207,23 @@ export default function Hero({ headerRef, paragraphRef, soundBtnRef }) {
               </div>
             </div>
           </main>
+          
 
           <div className={styles.sidebar__inner_link} ref={footerRef}>
+             <div className={styles.share__popup}>
+                <div className={styles.sharee__option}>
+                  <Copy /> <p>Copy link</p>
+                </div>
+                <div  className={styles.sharee__option}>
+                  <div className={styles.share__option_icon}><Image src='/X.svg' alt="X icon" fill/></div><p> X</p>
+                </div>
+                <div  className={styles.sharee__option}>
+                  <div  className={styles.share__option_icon}><Image src='/WhatsApp.svg' alt="Whtsapp icon" fill/></div><p>Whatsapp</p>
+                </div>
+                <div  className={styles.sharee__option}>
+                  <div  className={styles.share__option_icon}><Image src='/LinkedIN.svg' alt="LinkedIn icon" fill/></div><p>LinkedIn</p>
+                </div>
+              </div>
             <p>
               Built by{" "}
               <a
@@ -219,9 +235,9 @@ export default function Hero({ headerRef, paragraphRef, soundBtnRef }) {
               </a>
             </p>
             <div className={styles.share__wrapper}>
-              <a href="" className={styles.share__link}>
+              <p  className={styles.share__link}>
                 Share
-              </a>
+              </p>
             </div>
           </div>
         </div>
