@@ -18,6 +18,7 @@ import {
 import gsap from "gsap";
 import Dropdown from "./Dropdown";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Feeling = ({ emotion }) => {
   if (!emotion) return null;
@@ -94,6 +95,7 @@ const Feeling = ({ emotion }) => {
 };
 
 export default function Hero({ headerRef, paragraphRef, soundBtnRef }) {
+  const [shareOpen, setIsShareOpen] = useState(false);
   const [feeling, setFeeling] = useState();
   const [step, setStep] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -207,23 +209,46 @@ export default function Hero({ headerRef, paragraphRef, soundBtnRef }) {
               </div>
             </div>
           </main>
-          
 
           <div className={styles.sidebar__inner_link} ref={footerRef}>
-             <div className={styles.share__popup}>
-                <div className={styles.sharee__option}>
-                  <Copy /> <p>Copy link</p>
-                </div>
-                <div  className={styles.sharee__option}>
-                  <div className={styles.share__option_icon}><Image src='/X.svg' alt="X icon" fill/></div><p> X</p>
-                </div>
-                <div  className={styles.sharee__option}>
-                  <div  className={styles.share__option_icon}><Image src='/WhatsApp.svg' alt="Whtsapp icon" fill/></div><p>Whatsapp</p>
-                </div>
-                <div  className={styles.sharee__option}>
-                  <div  className={styles.share__option_icon}><Image src='/LinkedIN.svg' alt="LinkedIn icon" fill/></div><p>LinkedIn</p>
-                </div>
-              </div>
+            <AnimatePresence>
+              {shareOpen && (
+                <motion.div
+                  className={styles.share__popup}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                >
+                  <motion.div
+                    className={styles.sharee__option}
+                    initial={false}
+                    animate={{ backgroundColor: "transparent" }}
+                    whileHover={{ backgroundColor: "#ffffff" }}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.25, 0.25, 0.75, 0.75],
+                    }}
+                  >
+                    <Copy /> <p>Copy link</p>
+                  </motion.div>
+                  <motion.div
+                    className={styles.sharee__option}
+                    initial={false}
+                    animate={{ backgroundColor: "transparent" }}
+                    whileHover={{ backgroundColor: "#ffffff" }}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.25, 0.25, 0.75, 0.75],
+                    }}
+                  >
+                    <div className={styles.share__option_icon}>
+                      <Image src="/X.svg" alt="X icon" fill />
+                    </div>
+                    <p> X</p>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
             <p>
               Built by{" "}
               <a
@@ -235,7 +260,10 @@ export default function Hero({ headerRef, paragraphRef, soundBtnRef }) {
               </a>
             </p>
             <div className={styles.share__wrapper}>
-              <p  className={styles.share__link}>
+              <p
+                className={styles.share__link}
+                onClick={() => setIsShareOpen(!shareOpen)}
+              >
                 Share
               </p>
             </div>

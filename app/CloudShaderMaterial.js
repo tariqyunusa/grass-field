@@ -47,37 +47,26 @@ varying vec2 vUv;
 ${noise}
 
 void main() {
-  
-    float n = noise(vUv * 1.2 + vec2(time * 0.05, 0.0));
-    float cloud = smoothstep(0.25, 0.55, n);
+    // Blend multiple scales of noise for more shapeless/wispy feel
+       float n1 = noise(vUv * 1.2 + vec2(time * 0.05, 0.0));
+    float n2 = noise(vUv * 3.5 + vec2(time * 0.025, 5.0));
+    float n3 = noise(vUv * 8.0 + vec2(time * 0.01, 10.0));
 
+    float n = (n1 * 0.6 + n2 * 0.3 + n3 * 0.1);
+
+    // Clamp noise so it's not too flat
+    n = clamp(n, 0.0, 1.0);
+
+    // Softer but still visible
+    float cloud = smoothstep(0.25, 0.75, n);
+
+    // Vertical mask (keeps clouds within band)
     float verticalMask = smoothstep(0.3, 0.35, vUv.y) * (1.0 - smoothstep(0.9, 0.95, vUv.y));
     cloud *= verticalMask;
 
-
-    vec2 center1 = vec2(0.6, 0.6); 
-    vec2 offset1 = vUv - center1;
-    offset1.x *= 1.4;
-    float dist1 = length(offset1);
-    float staticCloud1 = smoothstep(0.3, 0.05, dist1);
-    float staticNoise1 = noise(vUv * 4.0 + vec2(10.0, 5.0));
-    staticCloud1 *= smoothstep(0.3, 0.6, staticNoise1);
-
-
-    vec2 center2 = vec2(0.35, 0.65); 
-    vec2 offset2 = vUv - center2;
-    offset2.x *= 1.2;
-    float dist2 = length(offset2);
-    float staticCloud2 = smoothstep(0.25, 0.05, dist2);
-    float staticNoise2 = noise(vUv * 4.5 + vec2(5.0, 3.0));
-    staticCloud2 *= smoothstep(0.3, 0.6, staticNoise2);
-
-    cloud = max(cloud, max(staticCloud1, staticCloud2));
-
-
-    gl_FragColor = vec4(color, cloud * 0.6); 
+    // Final softer opacity (raised to 0.6 so it's visible again)
+    gl_FragColor = vec4(color, cloud * 0.6);
 }
-
   `
 );
 

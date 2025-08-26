@@ -239,11 +239,11 @@
   border-radius: 18px;
   position: absolute;
   right: 0;
-  top: -12rem;
+  top: -7rem;
 }
-.sharee__option:hover {
+/* .sharee__option:hover {
   background-color: #fff;
-}
+} */
 /* feeling */
 .feelingTitle{
   font-family: var(--font-calistoga);

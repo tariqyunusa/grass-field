@@ -41,7 +41,7 @@ void main() {
   vec4 worldPos = instanceMatrix * vec4(position, 1.0);
   float windFreq = 0.2;
   vec2 windDir = vec2(1.0, 0.3);
-  float noiseValue = noise(worldPos.xz * windFreq + windDir * time * 2.0);
+  float noiseValue = noise(worldPos.xz * windFreq + windDir * time * 1.0);
   float sway = (noiseValue - 0.5) * amplitude * uv.y * 2.0;
   newPosition.x += sway;
   float curve = sin(uv.y * 3.14) * 0.01;
